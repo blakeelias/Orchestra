@@ -11,6 +11,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+ 
+import javax.net.ssl.HttpsURLConnection;
+
 public class MenuActivity extends Activity {
 	
 	public static final String MILLIS_EXTRA_KEY = "millis";
@@ -54,9 +62,17 @@ public class MenuActivity extends Activity {
             	startActivity(myIntent);
             	return true;
             case R.id.lights:
-            	long millis = System.currentTimeMillis();
-            	captureAudioMesssage(millis);
-            	capturePhoto(millis);
+            	HttpURLConnectionExample http = new HttpURLConnectionExample();
+            	try {
+            		Log.d(LOG_TAG, "fetching google.com");
+            		String response = http.sendGet("http://www.google.com/");
+            		Log.d(LOG_TAG, "here it is!");
+            		Log.d(LOG_TAG, response);
+            	}
+            	catch (Exception e) {
+            		Log.d(LOG_TAG, "exception while fetching google.com");
+            		Log.d(LOG_TAG, e.getMessage());
+            	}
             	return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -82,3 +98,40 @@ public class MenuActivity extends Activity {
 }
 
 
+
+ 
+class HttpURLConnectionExample {
+ 
+	private final String USER_AGENT = "Mozilla/5.0";
+ 
+	// HTTP GET request
+	public String sendGet(String url) throws Exception {
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+ 
+		// optional default is GET
+		con.setRequestMethod("GET");
+ 
+		//add request header
+		con.setRequestProperty("User-Agent", USER_AGENT);
+ 
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+ 
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+ 
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+ 
+		//print result
+		return response.toString();
+ 
+	}
+
+}
