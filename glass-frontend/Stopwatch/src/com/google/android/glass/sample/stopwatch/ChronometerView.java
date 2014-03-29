@@ -173,11 +173,10 @@ public class ChronometerView extends FrameLayout {
         // Cap chronometer to one hour.
         millis %= TimeUnit.HOURS.toMillis(1);
 
-        mMinuteView.setText(String.format("%02d", TimeUnit.MILLISECONDS.toMinutes(millis)));
-        millis %= TimeUnit.MINUTES.toMillis(1);
-        mSecondView.setText(String.format("%02d", TimeUnit.MILLISECONDS.toSeconds(millis)));
-        millis = (millis % TimeUnit.SECONDS.toMillis(1)) / 10;
-        mCentiSecondView.setText(String.format("%02d", millis));
+        //mMinuteView.setText(String.format("%02d", TimeUnit.MILLISECONDS.toMinutes(millis)));
+        mMinuteView.setText("wi");
+        mSecondView.setText("ld");
+        mCentiSecondView.setText("card");
         if (mChangeListener != null) {
             mChangeListener.onChange();
         }
