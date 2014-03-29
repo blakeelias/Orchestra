@@ -4,7 +4,7 @@
     <string name="app_name">Memora</string>
 
     <!-- Voice Commands -->
-    <string name="StartMemora">start memora</string> <!-- Starts Application -->
+    <string name="StartMemora">start orkestra</string> <!-- Starts Application -->
 
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
