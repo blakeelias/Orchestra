@@ -7,45 +7,46 @@ local onState = false // Assume device is off at first TODO: is it safe to assum
 function requestHandler(request, response) {
     try {
 
-
         // Toggles power to the device
         if ("powerToggle" in request.query) {
 
             onState != onState // Flip state
 
+            local command = {
+                powerState = onState ? 1 : 0
+            };
+
             // send flipped power state to device
-            device.send("setPowerState", onState);
+            device.send("command", command);
         }
 
         // Sets the device power to either on (1) or off (0)
-        if ("setPowerState" in request.query) {
+        if ("setPower" in request.query) {
+            if (request.query.setPower == "1" || request.query.setPower == "0") {
 
-            // if they did, and led=1.. set our variable to 1
-            if (request.query.led == "1" || request.query.led == "0") {
-                // convert the led query parameter to an integer
-                local ledState = request.query.led.tointeger();
+                local command = {
+                    powerState = request.query.setPower.tointeger()
+                };
 
-                // send "led" message to device, and send ledState as the data
-                device.send("led", ledState); 
+                device.send("setPower", command);
             }
         }
-        if ("led" in request.query) {
 
-            // if they did, and led=1.. set our variable to 1
-            if (request.query.led == "1" || request.query.led == "0") {
-                // convert the led query parameter to an integer
-                local ledState = request.query.led.tointeger();
+        // Reads in a dim command, whose value ranges from 0 to 65535
+        if ("dim" in request.query) {
+            local command = {
+                dimValue = request.query.dim.tointeger()
+            };
 
-                // send "led" message to device, and send ledState as the data
-                device.send("led", ledState); 
-            }
+            // send "led" message to device, and send ledState as the data
+            device.send("setDim", dimValue);
         }
         // send a response back saying everything was OK.
         response.send(200, "OK");
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
     }
-    }
+}
 
-    // register the HTTP handler
-    http.onrequest(requestHandler):q;
+// register the HTTP handler
+http.onrequest(requestHandler);
