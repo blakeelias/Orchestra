@@ -4,12 +4,12 @@
     <string name="app_name">Memora</string>
 
     <!-- Voice Commands -->
-    <string name="StartMemora">start memora</string> <!-- Starts Application -->
+    <string name="StartMemora">start orkestra</string> <!-- Starts Application -->
 
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="live_card_text">Memora</string>
+    <string name="live_card_text">Orkestra</string>
     <string name="lights">Turn On Lights</string>
     <string name="quit">Quit</string>
     <string name="title_activity_photo">PhotoActivity</string>
