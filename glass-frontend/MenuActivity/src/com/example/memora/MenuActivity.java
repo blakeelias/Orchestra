@@ -53,7 +53,7 @@ public class MenuActivity extends Activity {
             	Intent myIntent = new Intent(this, MomentsImmersion.class);
             	startActivity(myIntent);
             	return true;
-            case R.id.capture:
+            case R.id.lights:
             	long millis = System.currentTimeMillis();
             	captureAudioMesssage(millis);
             	capturePhoto(millis);
