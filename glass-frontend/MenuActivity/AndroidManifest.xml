@@ -21,13 +21,6 @@
             android:name="com.example.memora.AudioRecorder"
             android:enabled="true"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="com.google.android.glass.VoiceTrigger"
-                android:resource="@xml/voice_trigger_start" />
         </service>
 
         <activity
@@ -42,6 +35,17 @@
         <activity
             android:name="com.example.memora.MomentsImmersion"
             android:label="@string/title_activity_timeline_card" >
+        </activity>
+        <activity
+            android:name="com.example.memora.CarActivity"
+            android:label="Wildcard">
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voice_trigger_start" />
         </activity>
     </application>
 
