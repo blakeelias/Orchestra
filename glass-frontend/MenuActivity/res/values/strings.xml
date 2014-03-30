@@ -17,5 +17,6 @@
     <string name="play">Play</string>
     <string name="moments">Moments</string>
     <string name="title_activity_lights_toggle">LightsToggleActivity</string>
+    <string name="title_activity_lights_dim">LightsDimActivity</string>
 
 </resources>
