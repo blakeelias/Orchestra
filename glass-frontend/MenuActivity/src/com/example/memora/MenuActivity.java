@@ -106,6 +106,7 @@ public class MenuActivity extends Activity {
             case R.id.lights_toggle:
             	startActivity(new Intent(this, LightsToggleActivity.class));
             	finish();
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

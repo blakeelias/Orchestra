@@ -11,6 +11,7 @@ public class CarActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_car);
 		new HTTPTask().execute("http://54.208.144.6/remote.php?v0=car");
+		finish();
 	}
 
 	@Override
