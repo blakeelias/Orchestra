@@ -102,8 +102,11 @@ public class MenuActivity extends Activity {
             case R.id.car:
             	startActivity(new Intent(this, CarActivity.class));
             	return true;
-            case R.id.lights_toggle:
-            	startActivity(new Intent(this, LightsToggleActivity.class));
+            case R.id.lights_on:
+            	startActivity(new Intent(this, LightsOnActivity.class));
+            	return true;
+            case R.id.lights_off:
+            	startActivity(new Intent(this, LightsOffActivity.class));
             	return true;
             default:
                 return super.onOptionsItemSelected(item);

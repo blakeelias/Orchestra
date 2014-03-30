@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class LightsToggleActivity extends Activity {
+public class LightsOnActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lights_toggle);
-		new HTTPTask().execute("http://54.208.144.6/remote.php?v0=light&v1=togglePower&v2=1");
+		new HTTPTask().execute("http://54.208.144.6/remote.php?v0=light&v1=power&v2=1");
 		finish();
 	}
 

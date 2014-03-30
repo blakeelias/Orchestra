@@ -55,15 +55,26 @@
                 android:resource="@xml/voice_trigger_start_car" />
         </activity>
         <activity
-            android:name="com.example.memora.LightsToggleActivity"
-            android:label="@string/title_activity_lights_toggle" >
+            android:name="com.example.memora.LightsOnActivity"
+            android:label="Turn on the lights" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
 
             <meta-data
                 android:name="com.google.android.glass.VoiceTrigger"
-                android:resource="@xml/voice_trigger_lights_toggle" />
+                android:resource="@xml/voice_trigger_lights_on" />
+        </activity>
+        <activity
+            android:name="com.example.memora.LightsOffActivity"
+            android:label="Turn off the lights" >
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voice_trigger_lights_off" />
         </activity>
         <activity
             android:name="com.example.memora.LightsDimActivity"
