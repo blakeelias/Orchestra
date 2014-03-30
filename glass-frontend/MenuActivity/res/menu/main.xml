@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <item
-        android:id="@+id/stop"
-        android:title="@string/quit"               
-        android:icon="@drawable/ic_no_50" /> 
     <item
         android:id="@+id/car"
         android:title="Start my car"               
@@ -14,6 +9,11 @@
         android:id="@+id/lights_toggle"
         android:title="Toggle the lights"               
         android:icon="@drawable/ic_star_50" /> 
+        
+    <item
+        android:id="@+id/stop"
+        android:title="@string/quit"               
+        android:icon="@drawable/ic_no_50" /> 
 </menu>
 
 

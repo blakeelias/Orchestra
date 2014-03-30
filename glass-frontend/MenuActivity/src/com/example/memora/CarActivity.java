@@ -20,5 +20,4 @@ public class CarActivity extends Activity {
 		getMenuInflater().inflate(R.menu.car, menu);
 		return true;
 	}
-
 }
