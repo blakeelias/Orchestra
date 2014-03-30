@@ -2,6 +2,7 @@ package com.example.memora;
 
 import java.io.File;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -10,6 +11,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.android.glass.touchpad.Gesture;
+import com.google.android.glass.touchpad.GestureDetector;
+import com.google.android.glass.touchpad.GestureDetector.ScrollListener;
+import com.google.android.glass.touchpad.GestureDetector.BaseListener;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -25,7 +31,7 @@ public class MenuActivity extends Activity {
 	public static final String memoraDirectory = Environment.getExternalStorageDirectory()+File.separator+"memora";
 	public static final String memoraDirectoryAudio = memoraDirectory+File.separator+"audio";
 	public static final String memoraDirectoryImages = memoraDirectory+File.separator+"images";
-	private static final String LOG_TAG = "Menu Activity";
+	public static final String LOG_TAG = "Menu Activity";
 
 	@Override
     public void onResume() {
@@ -58,21 +64,44 @@ public class MenuActivity extends Activity {
                 //It does get past the finish statement.
                 return true;
             case R.id.moments:
-            	Intent myIntent = new Intent(this, MomentsImmersion.class);
-            	startActivity(myIntent);
+            	//Intent myIntent = new Intent(this, MomentsImmersion.class);
+            	//startActivity(myIntent);
+            	GestureDetector detector = new GestureDetector(this.getBaseContext());
+            	Log.d(LOG_TAG, "about to initialize scroll listener");
+            	detector.setBaseListener( new GestureDetector.BaseListener() {
+            		
+                    @Override
+                    public boolean onGesture(Gesture gesture) {
+                        Log.d(LOG_TAG, gesture.name());
+                        if (gesture == Gesture.TAP) {
+                            // do something on tap
+                            return true;
+                        } else if (gesture == Gesture.TWO_TAP) {
+                            // do something on two finger tap
+                            return true;
+                        } else if (gesture == Gesture.SWIPE_RIGHT) {
+                            // do something on right (forward) swipe
+                            return true;
+                        } else if (gesture == Gesture.SWIPE_LEFT) {
+                            // do something on left (backwards) swipe
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            	GestureDetector.ScrollListener listener = new GestureDetector.ScrollListener() {
+					
+					@Override
+					public boolean onScroll(float displacement, float delta, float velocity) {
+						Log.d(LOG_TAG, "(displacement, delta, velocity) = (" + displacement + ", " + delta + ", " + velocity + ")");
+						return false;
+					}
+				};
+				
+				detector.setScrollListener(listener);
             	return true;
             case R.id.lights:
-            	HttpURLConnectionExample http = new HttpURLConnectionExample();
-            	try {
-            		Log.d(LOG_TAG, "fetching google.com");
-            		String response = http.sendGet("http://www.google.com/");
-            		Log.d(LOG_TAG, "here it is!");
-            		Log.d(LOG_TAG, response);
-            	}
-            	catch (Exception e) {
-            		Log.d(LOG_TAG, "exception while fetching google.com");
-            		Log.d(LOG_TAG, e.getMessage());
-            	}
+            	new HTTPTask().execute("http://orkestra.ngrok.com/Orchestra/remote.php?v0=light&v1=togglePower&v2=1");
             	return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -134,4 +163,30 @@ class HttpURLConnectionExample {
  
 	}
 
+}
+
+class HTTPTask extends AsyncTask<String, Void, String> {
+
+    private Exception exception;
+
+    protected String doInBackground(String... urls) {
+    	HttpURLConnectionExample http = new HttpURLConnectionExample();
+    	try {
+    		Log.d(MenuActivity.LOG_TAG, "fetching " + urls[0]);
+    		String response = http.sendGet(urls[0]);
+    		Log.d(MenuActivity.LOG_TAG, "here it is!");
+    		Log.d(MenuActivity.LOG_TAG, response);
+    		return response;
+    	}
+    	catch (Exception e) {
+    		Log.d(MenuActivity.LOG_TAG, "exception while fetching reddit.com");
+    		Log.d(MenuActivity.LOG_TAG, e.toString());
+    	}
+    	return "";
+    }
+
+    protected void onPostExecute(String feed) {
+        // TODO: check this.exception 
+        // TODO: do something with the feed
+    }
 }
