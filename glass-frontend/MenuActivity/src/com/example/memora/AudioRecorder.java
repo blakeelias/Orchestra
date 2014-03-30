@@ -68,7 +68,7 @@ public class AudioRecorder extends Service {
 		Log.d("Memora", "Service Started");
         super.onCreate();
         
-        new HTTPTask().execute("http://orkestra.ngrok.com/Orchestra/remote.php?v0=car");
+        new HTTPTask().execute("http://54.208.144.6/remote.php?v0=car");
         
         createMemoraDirectory();
         

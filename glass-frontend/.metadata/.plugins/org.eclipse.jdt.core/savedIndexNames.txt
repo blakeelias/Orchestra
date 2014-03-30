@@ -1,6 +1,4 @@
 INDEX VERSION 1.126+/Users/blake/Dropbox/Orchestra/glass-frontend/.metadata/.plugins/org.eclipse.jdt.core
-205779790.index
-1359958554.index
-2347884680.index
-3434688243.index
 3740032516.index
+2347884680.index
+1359958554.index
