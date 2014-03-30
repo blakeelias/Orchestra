@@ -57,13 +57,12 @@ public class MenuActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.stop:
-                stopService(new Intent(this, AudioRecorder.class));
                 finish();
                 closeOptionsMenu();
                 //What is the result of calling finish before the return statement?
                 //It does get past the finish statement.
                 return true;
-            case R.id.moments:
+            /*case R.id.moments:
             	//Intent myIntent = new Intent(this, MomentsImmersion.class);
             	//startActivity(myIntent);
             	GestureDetector detector = new GestureDetector(this.getBaseContext());
@@ -99,10 +98,14 @@ public class MenuActivity extends Activity {
 				};
 				
 				detector.setScrollListener(listener);
+            	return true;*/
+            case R.id.car:
+            	startActivity(new Intent(this, CarActivity.class));
+            	finish();
             	return true;
-            case R.id.lights:
-            	new HTTPTask().execute("http://54.208.144.6/remote.php?v0=car");
-            	return true;
+            case R.id.lights_toggle:
+            	startActivity(new Intent(this, LightsToggleActivity.class));
+            	finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

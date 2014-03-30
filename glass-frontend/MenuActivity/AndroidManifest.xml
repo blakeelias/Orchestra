@@ -38,14 +38,25 @@
         </activity>
         <activity
             android:name="com.example.memora.CarActivity"
-            android:label="Wildcard">
+            android:label="Wildcard" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
 
             <meta-data
                 android:name="com.google.android.glass.VoiceTrigger"
-                android:resource="@xml/voice_trigger_start" />
+                android:resource="@xml/voice_trigger_start_car" />
+        </activity>
+        <activity
+            android:name="com.example.memora.LightsToggleActivity"
+            android:label="@string/title_activity_lights_toggle" >
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voice_trigger_lights_toggle" />
         </activity>
     </application>
 
