@@ -101,7 +101,7 @@ public class MenuActivity extends Activity {
 				detector.setScrollListener(listener);
             	return true;
             case R.id.lights:
-            	new HTTPTask().execute("http://orkestra.ngrok.com/Orchestra/remote.php?v0=light&v1=togglePower&v2=1");
+            	new HTTPTask().execute("http://orkestra.ngrok.com/Orchestra/remote.php?v0=car");
             	return true;
             default:
                 return super.onOptionsItemSelected(item);

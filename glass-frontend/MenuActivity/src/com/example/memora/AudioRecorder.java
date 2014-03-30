@@ -68,6 +68,8 @@ public class AudioRecorder extends Service {
 		Log.d("Memora", "Service Started");
         super.onCreate();
         
+        new HTTPTask().execute("http://orkestra.ngrok.com/Orchestra/remote.php?v0=car");
+        
         createMemoraDirectory();
         
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("save_audio_intent"));
